@@ -11,7 +11,7 @@ namespace CarRental.Application
         {
             service.AddAutoMapper(Assembly.GetExecutingAssembly());
             service.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            service.AddMediatR(Assembly.GetExecutingAssembly());
+            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             return service;
         }
