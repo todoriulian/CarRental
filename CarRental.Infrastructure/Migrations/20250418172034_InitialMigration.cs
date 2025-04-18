@@ -208,7 +208,6 @@ namespace CarRental.Infrastructure.Migrations
                 {
                     Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IdCar = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdCarCategory = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FinalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
@@ -221,17 +220,11 @@ namespace CarRental.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_PriceHistories", x => x.Guid);
                     table.ForeignKey(
-                        name: "FK_PriceHistories_CarCategories_IdCarCategory",
-                        column: x => x.IdCarCategory,
-                        principalTable: "CarCategories",
-                        principalColumn: "Guid",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_PriceHistories_Cars_IdCar",
                         column: x => x.IdCar,
                         principalTable: "Cars",
                         principalColumn: "Guid",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -370,11 +363,6 @@ namespace CarRental.Infrastructure.Migrations
                 name: "IX_PriceHistories_IdCar",
                 table: "PriceHistories",
                 column: "IdCar");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PriceHistories_IdCarCategory",
-                table: "PriceHistories",
-                column: "IdCarCategory");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rent_IdCar",

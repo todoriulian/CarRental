@@ -393,9 +393,6 @@ namespace CarRental.Infrastructure.Migrations
                     b.Property<Guid>("IdCar")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("IdCarCategory")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -411,8 +408,6 @@ namespace CarRental.Infrastructure.Migrations
                     b.HasKey("Guid");
 
                     b.HasIndex("IdCar");
-
-                    b.HasIndex("IdCarCategory");
 
                     b.ToTable("PriceHistories");
                 });
@@ -580,18 +575,10 @@ namespace CarRental.Infrastructure.Migrations
                     b.HasOne("CarRental.Domain.Entities.Car", "Car")
                         .WithMany()
                         .HasForeignKey("IdCar")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CarRental.Domain.Entities.CarCategory", "CarCategory")
-                        .WithMany()
-                        .HasForeignKey("IdCarCategory")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Car");
-
-                    b.Navigation("CarCategory");
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Rent", b =>
