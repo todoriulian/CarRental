@@ -9,7 +9,6 @@ namespace CarRental.Application.PriceHistory.Commands
     public class AddPriceHistoryCommand : IRequest<PriceHistoryDTO>
     {
         public Guid IdCar { get; set; }
-        public Guid IdCarCategory { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime FinalDate { get; set; }
         public decimal Price { get; set; }
@@ -34,7 +33,6 @@ namespace CarRental.Application.PriceHistory.Commands
             {
                 Guid = Guid.NewGuid(),
                 IdCar = request.IdCar,
-                IdCarCategory = request.IdCarCategory,
                 StartDate = request.StartDate,
                 FinalDate = request.FinalDate,
                 Price = request.Price

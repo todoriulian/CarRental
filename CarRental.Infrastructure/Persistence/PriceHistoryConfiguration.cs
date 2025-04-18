@@ -14,9 +14,6 @@ namespace CarRental.Infrastructure.Persistence
             builder.Property(priceHistory => priceHistory.IdCar)
                 .IsRequired();
 
-            builder.Property(priceHistory => priceHistory.IdCarCategory)
-                .IsRequired();
-
             builder.Property(priceHistory => priceHistory.StartDate)
                 .IsRequired();
 
@@ -29,12 +26,8 @@ namespace CarRental.Infrastructure.Persistence
 
             builder.HasOne(priceHistory => priceHistory.Car)
                 .WithMany()
-                .HasForeignKey(priceHistory => priceHistory.IdCar);
-
-            builder.HasOne(priceHistory => priceHistory.CarCategory)
-                .WithMany()
-                .HasForeignKey(priceHistory => priceHistory.IdCarCategory);
-
+                .HasForeignKey(priceHistory => priceHistory.IdCar)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Configure BaseAuditableEntity properties
             builder.Property(carDetail => carDetail.Created)

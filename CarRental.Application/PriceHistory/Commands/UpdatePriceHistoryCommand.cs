@@ -11,7 +11,6 @@ namespace CarRental.Application.PriceHistory.Commands
     {
         public Guid Guid { get; set; }
         public Guid IdCar { get; set; }
-        public Guid IdCarCategory { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime FinalDate { get; set; }
         public decimal Price { get; set; }
@@ -39,7 +38,6 @@ namespace CarRental.Application.PriceHistory.Commands
             }
 
             priceHistory.IdCar = request.IdCar;
-            priceHistory.IdCarCategory = request.IdCarCategory;
             priceHistory.StartDate = request.StartDate;
             priceHistory.FinalDate = request.FinalDate;
             priceHistory.Price = request.Price;
