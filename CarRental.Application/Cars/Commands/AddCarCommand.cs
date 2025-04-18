@@ -14,7 +14,7 @@ namespace CarRental.Application.Cars.Commands
         public decimal Motor { get; set; }
         public string Fuel { get; set; } = null!;
         public int Seats { get; set; }
-        public int IdCategory { get; set; }
+        public Guid IdCategory { get; set; }
     }
 
     public class AddCarCommandHandler : IRequestHandler<AddCarCommand, CarDTO>

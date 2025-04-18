@@ -31,7 +31,7 @@ namespace CarRental.Infrastructure.Services
         {
             return await _dataContext.Set<T>()
                                 .Where(x => !x.IsDeleted)
-                                .FirstOrDefaultAsync(i => i.Id == guid);
+                                .FirstOrDefaultAsync(i => i.Guid == guid);
         }
 
         public async Task<T> InsertAsync<T>(T value) where T : BaseAuditableEntity
@@ -48,7 +48,7 @@ namespace CarRental.Infrastructure.Services
         public void Update<T>(T value) where T : BaseAuditableEntity
         {
             _dataContext.Set<T>().Update(value);
-            _dataContext.Entry(value).Property(e => e.Id).IsModified = false;
+            _dataContext.Entry(value).Property(e => e.Guid).IsModified = false;
         }
 
         public void SoftDelete<T>(Guid guid) where T : BaseAuditableEntity
@@ -74,7 +74,7 @@ namespace CarRental.Infrastructure.Services
         {
             IQueryable<T> query = _dataContext.Set<T>()
                                 .Where(x => !x.IsDeleted);
-            return query.FirstOrDefault(i => i.Id == guid);
+            return query.FirstOrDefault(i => i.Guid == guid);
         }
 
         public IQueryable<T> Get<T>() where T : BaseAuditableEntity
