@@ -4,7 +4,6 @@ namespace CarRental.Domain.Entities
 {
     public class Car : BaseAuditableEntity
     {
-        public Guid Guid { get; set; }
         public string LicensePlate { get; set; } = null!;
         public string Model { get; set; } = null!;
         public string Manufacturer { get; set; } = null!;
