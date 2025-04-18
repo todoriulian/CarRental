@@ -4,6 +4,7 @@ namespace CarRental.Domain.Entities
 {
     public class RentHistory : BaseAuditableEntity
     {
+        public Guid Guid { get; set; }
         public Guid IdCar { get; set; }
         public Guid IdClient { get; set; }
         public DateTime RentDate { get; set; }

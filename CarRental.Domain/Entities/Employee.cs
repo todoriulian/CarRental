@@ -3,6 +3,7 @@ namespace CarRental.Domain.Entities
 {
     public class Employee : BaseAuditableEntity
     {
+        public Guid Guid { get; set; }
         public string Name { get; set; } = null!;
         public DateTime Birthday { get; set; }
         public DateTime HireDate { get; set; }
