@@ -6,7 +6,7 @@ namespace CarRental.Application.CarCategories.Commands
 {
     public record DeleteCarCategoryCommand(Guid Id) : IRequest;
 
-    public class DeleteCarCategoryCommandHandler : IRequest<DeleteCarCategoryCommand>
+    public class DeleteCarCategoryCommandHandler : IRequestHandler<DeleteCarCategoryCommand>
     {
         private readonly IRepository _repository;
 
@@ -15,12 +15,10 @@ namespace CarRental.Application.CarCategories.Commands
             _repository = repository;
         }
 
-        public async Task<Unit> Handle(DeleteCarCategoryCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteCarCategoryCommand request, CancellationToken cancellationToken)
         {
             _repository.SoftDelete<CarCategory>(request.Id);
             await _repository.SaveChangesAsync(cancellationToken);
-
-            return Unit.Value;
         }
     }
 }

@@ -1,6 +1,9 @@
-﻿namespace CarRental.Application.Employees.Dtos
+﻿using CarRental.Application.Common.Mapping;
+using CarRental.Domain.Entities;
+
+namespace CarRental.Application.Employees.Dtos
 {
-    public class EmployeeDTO
+    public class EmployeeDTO : IMapFrom<Employee>
     {
         public Guid Guid { get; set; }
         public string Name { get; set; } = null!;

@@ -6,7 +6,7 @@ namespace CarRental.Application.DrivingLicenceCategory.Commands
 {
     public record DeleteDrivingLicenceCategoryCommand(Guid Id) : IRequest;
 
-    public class DeleteDrivingLicenceCategoryCommandHandler : IRequest<DeleteDrivingLicenceCategoryCommand>
+    public class DeleteDrivingLicenceCategoryCommandHandler : IRequestHandler<DeleteDrivingLicenceCategoryCommand>
     {
         private readonly IRepository _repository;
 
@@ -15,12 +15,10 @@ namespace CarRental.Application.DrivingLicenceCategory.Commands
             _repository = repository;
         }
 
-        public async Task<Unit> Handle(DeleteDrivingLicenceCategoryCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteDrivingLicenceCategoryCommand request, CancellationToken cancellationToken)
         {
             _repository.SoftDelete<Domain.Entities.DrivingLicenceCategory>(request.Id);
             await _repository.SaveChangesAsync(cancellationToken);
-
-            return Unit.Value;
         }
     }
 }

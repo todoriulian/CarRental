@@ -1,6 +1,9 @@
-﻿namespace CarRental.Application.PriceHistory.Dtos
+﻿using CarRental.Application.Common.Mapping;
+using CarRental.Domain.Entities;
+
+namespace CarRental.Application.PriceHistory.Dtos
 {
-    public class PriceHistoryDTO
+    public class PriceHistoryDTO : IMapFrom<Domain.Entities.PriceHistory>
     {
         public Guid Guid { get; set; }
         public Guid IdCar { get; set; }

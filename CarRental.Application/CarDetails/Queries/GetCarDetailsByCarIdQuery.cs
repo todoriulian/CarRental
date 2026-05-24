@@ -27,9 +27,9 @@ namespace CarRental.Application.CarDetails.Queries
 
         public async Task<List<CarDetailsDTO>> Handle(GetCarDetailsByCarIdQuery request, CancellationToken cancellationToken)
         {
-            var carDetailsa = _repository.Get<CarDetail>().Where(cd => cd.IdCar == request.CarId).ToList();
+            var carDetails = _repository.Get<CarDetail>().Where(cd => cd.IdCar == request.CarId).ToList();
 
-            return _mapper.Map<List<CarDetailsDTO>>(carDetailsa);
+            return _mapper.Map<List<CarDetailsDTO>>(carDetails);
         }
     }
 }

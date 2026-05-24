@@ -6,7 +6,7 @@ namespace CarRental.Application.Cars.Commands
 {
     public record DeleteCarCommand(Guid Id) : IRequest;
 
-    public class DeleteCarCommandHandler : IRequest<DeleteCarCommand>
+    public class DeleteCarCommandHandler : IRequestHandler<DeleteCarCommand>
     {
         private readonly IRepository _repository;
 
@@ -15,12 +15,10 @@ namespace CarRental.Application.Cars.Commands
             _repository = repository;
         }
 
-        public async Task<Unit> Handle(DeleteCarCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteCarCommand request, CancellationToken cancellationToken)
         {
             _repository.SoftDelete<Car>(request.Id);
             await _repository.SaveChangesAsync(cancellationToken);
-
-            return Unit.Value;
         }
     }
 }

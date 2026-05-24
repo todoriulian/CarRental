@@ -29,7 +29,7 @@ namespace CarRental.Application.DriverHistory.Queries
         {
             if (request.Id == Guid.Empty)
             {
-                throw new System.ApplicationException("Invalid Id");
+                throw new NotFoundException(nameof(DriverHistory), request.Id);
             }
 
             var driverHistory = await _repository.GetByIdAsync<Domain.Entities.DriverHistory>(request.Id);

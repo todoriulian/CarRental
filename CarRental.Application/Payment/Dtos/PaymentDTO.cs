@@ -1,6 +1,9 @@
-﻿namespace CarRental.Application.Payment.Dtos
+﻿using CarRental.Application.Common.Mapping;
+using CarRental.Domain.Entities;
+
+namespace CarRental.Application.Payment.Dtos
 {
-    public class PaymentDTO
+    public class PaymentDTO : IMapFrom<Domain.Entities.Payment>
     {
         public Guid Guid { get; set; }
         public Guid IdClient { get; set; }

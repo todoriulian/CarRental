@@ -6,7 +6,7 @@ namespace CarRental.Application.PriceHistory.Commands
 {
     public record DeletePriceHistoryCommand(Guid Id) : IRequest;
 
-    public class DeletePriceHistoryCommandHandler : IRequest<DeletePriceHistoryCommand>
+    public class DeletePriceHistoryCommandHandler : IRequestHandler<DeletePriceHistoryCommand>
     {
         private readonly IRepository _repository;
 
@@ -15,12 +15,10 @@ namespace CarRental.Application.PriceHistory.Commands
             _repository = repository;
         }
 
-        public async Task<Unit> Handle(DeletePriceHistoryCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeletePriceHistoryCommand request, CancellationToken cancellationToken)
         {
             _repository.SoftDelete<Domain.Entities.PriceHistory>(request.Id);
             await _repository.SaveChangesAsync(cancellationToken);
-
-            return Unit.Value;
         }
     }
 }

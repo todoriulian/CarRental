@@ -29,7 +29,7 @@ namespace CarRental.Application.Employees.Queries
         {
             if (request.Id == Guid.Empty)
             {
-                throw new System.ApplicationException("Invalid Id");
+                throw new NotFoundException(nameof(Employee), request.Id);
             }
 
             var employee = await _repository.GetByIdAsync<Domain.Entities.Employee>(request.Id);

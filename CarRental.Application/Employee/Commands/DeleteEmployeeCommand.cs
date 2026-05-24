@@ -6,7 +6,7 @@ namespace CarRental.Application.Employees.Commands
 {
     public record DeleteEmployeeCommand(Guid Id) : IRequest;
 
-    public class DeleteEmployeeCommandHandler : IRequest<DeleteEmployeeCommand>
+    public class DeleteEmployeeCommandHandler : IRequestHandler<DeleteEmployeeCommand>
     {
         private readonly IRepository _repository;
 
@@ -15,12 +15,10 @@ namespace CarRental.Application.Employees.Commands
             _repository = repository;
         }
 
-        public async Task<Unit> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
         {
             _repository.SoftDelete<Employee>(request.Id);
             await _repository.SaveChangesAsync(cancellationToken);
-
-            return Unit.Value;
         }
     }
 }

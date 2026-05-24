@@ -1,6 +1,9 @@
-﻿namespace CarRental.Application.DrivingLicenceCategory.Dtos
+﻿using CarRental.Application.Common.Mapping;
+using CarRental.Domain.Entities;
+
+namespace CarRental.Application.DrivingLicenceCategory.Dtos
 {
-    public class DrivingLicenceCategoryDTO
+    public class DrivingLicenceCategoryDTO : IMapFrom<Domain.Entities.DrivingLicenceCategory>
     {
         public Guid Guid { get; set; }
         public string Description { get; set; } = null!;

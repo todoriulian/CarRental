@@ -1,6 +1,9 @@
-﻿namespace CarRental.Domain.Entities
+﻿using CarRental.Application.Common.Mapping;
+using CarRental.Domain.Entities;
+
+namespace CarRental.Application.Cars.Dtos
 {
-    public class CarDTO
+    public class CarDTO : IMapFrom<Car>
     {
         public Guid Guid { get; set; }
         public string LicensePlate { get; set; } = null!;
@@ -10,7 +13,7 @@
         public decimal Motor { get; set; }
         public string Fuel { get; set; } = null!;
         public int Seats { get; set; }
-        public int IdCategory { get; set; }
+        public Guid IdCategory { get; set; }
         public string? CategoryDescription { get; set; }
     }
 }

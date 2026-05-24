@@ -29,7 +29,7 @@ namespace CarRental.Application.CarCategories.Queries
         {
             if (request.Id == Guid.Empty)
             {
-                throw new System.ApplicationException("Invalid Id");
+                throw new NotFoundException(nameof(CarCategory), request.Id);
             }
 
             var carCategory = await _repository.GetByIdAsync<CarCategory>(request.Id);

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using CarRental.Application.DrivingLicenceCategoryDriver.Commands;
 using CarRental.Application.DrivingLicenceCategoryDriver.Queries;
@@ -10,6 +11,7 @@ namespace CarRental.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DrivingLicenceCategoryDriverController : ControllerBase
     {
         private readonly IMediator _mediator;

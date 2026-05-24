@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using CarRental.Application.Cars.Commands;
+using CarRental.Application.Cars.Dtos;
 using CarRental.Application.Cars.Queries;
 using CarRental.Application.Common.Models;
 using CarRental.Domain.Entities;
@@ -10,6 +12,7 @@ namespace CarRental.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CarController : ControllerBase
     {
         private readonly IMediator _mediator;

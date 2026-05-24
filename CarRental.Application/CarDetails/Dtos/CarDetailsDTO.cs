@@ -1,6 +1,9 @@
-﻿namespace CarRental.Application.CarDetails.Dtos
+﻿using CarRental.Application.Common.Mapping;
+using CarRental.Domain.Entities;
+
+namespace CarRental.Application.CarDetails.Dtos
 {
-    public class CarDetailsDTO
+    public class CarDetailsDTO : IMapFrom<CarDetail>
     {
         public Guid Guid { get; set; }
         public Guid IdCar { get; set; }

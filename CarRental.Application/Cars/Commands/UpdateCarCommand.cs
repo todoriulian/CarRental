@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using CarRental.Application.Common.Interfaces;
+using CarRental.Application.Cars.Dtos;
 using CarRental.Domain.Entities;
 using CarRental.Application.Common.Exceptions;
 

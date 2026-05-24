@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Sign-In Test</title>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+</head>
+<body>
+    <h2>Google Sign-In Test - Get Bearer Token</h2>
+    <div id="g_id_onload"
+         data-client_id="300130622903-g8tg8l7f0rabv7t1pjf8o6vu985kq8fe.apps.googleusercontent.com"
+         data-callback="handleCredentialResponse">
+    </div>
+    <div class="g_id_signin" data-type="standard"></div>
+
+    <h3>Your ID Token (use as Bearer token in Swagger):</h3>
+    <textarea id="token" rows="10" cols="80" readonly placeholder="Sign in to get token..."></textarea>
+    <br><br>
+    <button onclick="copyToken()">Copy Token</button>
+
+    <script>
+        function handleCredentialResponse(response) {
+            document.getElementById('token').value = response.credential;
+        }
+        function copyToken() {
+            var t = document.getElementById('token');
+            t.select();
+            navigator.clipboard.writeText(t.value);
+            alert('Token copied!');
+        }
+    </script>
+</body>
+</html>

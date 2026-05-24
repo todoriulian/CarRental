@@ -6,7 +6,7 @@ namespace CarRental.Application.DriverHistory.Commands
 {
     public record DeleteDriverHistoryCommand(Guid Id) : IRequest;
 
-    public class DeleteDriverHistoryCommandHandler : IRequest<DeleteDriverHistoryCommand>
+    public class DeleteDriverHistoryCommandHandler : IRequestHandler<DeleteDriverHistoryCommand>
     {
         private readonly IRepository _repository;
 
@@ -15,12 +15,10 @@ namespace CarRental.Application.DriverHistory.Commands
             _repository = repository;
         }
 
-        public async Task<Unit> Handle(DeleteDriverHistoryCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteDriverHistoryCommand request, CancellationToken cancellationToken)
         {
             _repository.SoftDelete<Domain.Entities.DriverHistory>(request.Id);
             await _repository.SaveChangesAsync(cancellationToken);
-
-            return Unit.Value;
         }
     }
 }

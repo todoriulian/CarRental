@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using CarRental.Application.CarDetails.Commands;
 using CarRental.Application.CarDetails.Queries;
@@ -10,6 +11,7 @@ namespace CarRental.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CarDetailsController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -58,6 +60,13 @@ namespace CarRental.API.Controllers
         public async Task<ActionResult<PaginatedList<CarDetailsDTO>>> GetCarDetailsWithPagination([FromQuery] GetCarDetailsWithPaginationQuery query)
         {
             var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        [HttpGet("bycar/{carId}")]
+        public async Task<ActionResult<List<CarDetailsDTO>>> GetCarDetailsByCarId(Guid carId)
+        {
+            var result = await _mediator.Send(new GetCarDetailsByCarIdQuery { CarId = carId });
             return Ok(result);
         }
     }
