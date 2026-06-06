@@ -6,6 +6,7 @@ using CarRental.Application.Clients.Commands;
 using CarRental.Application.Clients.Queries;
 using CarRental.Application.Clients.Dtos;
 using CarRental.Application.Common.Models;
+using CarRental.Domain.Common.Enums;
 
 namespace CarRental.API.Controllers
 {
@@ -24,6 +25,7 @@ namespace CarRental.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{UserRole.Admin},{UserRole.Dispatcher}")]
         public async Task<ActionResult<ClientDTO>> AddClient(AddClientCommand command)
         {
             var result = await _mediator.Send(command);
@@ -31,6 +33,7 @@ namespace CarRental.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = UserRole.Admin)]
         public async Task<IActionResult> DeleteClient(Guid id)
         {
             await _mediator.Send(new DeleteClientCommand(id));
@@ -38,6 +41,7 @@ namespace CarRental.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = $"{UserRole.Admin},{UserRole.Dispatcher}")]
         public async Task<ActionResult<ClientDTO>> UpdateClient(Guid id, UpdateClientCommand command)
         {
             if (id != command.Guid)

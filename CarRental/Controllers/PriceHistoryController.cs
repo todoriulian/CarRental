@@ -6,6 +6,7 @@ using CarRental.Application.PriceHistory.Commands;
 using CarRental.Application.PriceHistory.Queries;
 using CarRental.Application.PriceHistory.Dtos;
 using CarRental.Application.Common.Models;
+using CarRental.Domain.Common.Enums;
 
 namespace CarRental.API.Controllers
 {
@@ -24,6 +25,7 @@ namespace CarRental.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{UserRole.Admin},{UserRole.Dispatcher}")]
         public async Task<ActionResult<PriceHistoryDTO>> AddPriceHistory(AddPriceHistoryCommand command)
         {
             var result = await _mediator.Send(command);
@@ -31,6 +33,7 @@ namespace CarRental.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = UserRole.Admin)]
         public async Task<IActionResult> DeletePriceHistory(Guid id)
         {
             await _mediator.Send(new DeletePriceHistoryCommand(id));
@@ -38,6 +41,7 @@ namespace CarRental.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = $"{UserRole.Admin},{UserRole.Dispatcher}")]
         public async Task<ActionResult<PriceHistoryDTO>> UpdatePriceHistory(Guid id, UpdatePriceHistoryCommand command)
         {
             if (id != command.Guid)

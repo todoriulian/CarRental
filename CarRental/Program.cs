@@ -1,6 +1,8 @@
 using CarRental.Application;
 using CarRental.Infrastructure;
 using CarRental.Infrastructure.Persistence;
+using CarRental.Domain.Common.Enums;
+using CarRental.Domain.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -82,7 +84,15 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    db.Database.Migrate();
+    try
+    {
+        db.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating the database. Ensure the SQL Server is reachable and the connection string is correct.");
+    }
 }
 
 //if (!app.Environment.IsDevelopment())

@@ -1,6 +1,7 @@
 ﻿using CarRental.Application.Common.Interfaces;
 using CarRental.Infrastructure.Persistence;
 using CarRental.Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,7 @@ namespace CarRental.Infrastructure
             ));
 
             services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IClaimsTransformation, RoleClaimsTransformation>();
 
             return services;
         }

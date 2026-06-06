@@ -24,6 +24,7 @@ namespace CarRental.Infrastructure.Persistence
         public DbSet<Payment> Payments => Set<Payment>();
         public DbSet<PriceHistory> PriceHistories => Set<PriceHistory>();
         public DbSet<RentHistory> RentHistories => Set<RentHistory>();
+        public DbSet<ApplicationUser> ApplicationUsers => Set<ApplicationUser>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

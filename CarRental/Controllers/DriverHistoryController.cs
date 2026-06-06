@@ -6,6 +6,7 @@ using CarRental.Application.DriverHistory.Commands;
 using CarRental.Application.DriverHistory.Queries;
 using CarRental.Application.DriverHistory.Dtos;
 using CarRental.Application.Common.Models;
+using CarRental.Domain.Common.Enums;
 
 namespace CarRental.API.Controllers
 {
@@ -24,6 +25,7 @@ namespace CarRental.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{UserRole.Admin},{UserRole.Dispatcher}")]
         public async Task<ActionResult<DriverHistoryDTO>> AddDriverHistory(AddDriverHistoryCommand command)
         {
             var result = await _mediator.Send(command);
@@ -31,6 +33,7 @@ namespace CarRental.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = UserRole.Admin)]
         public async Task<IActionResult> DeleteDriverHistory(Guid id)
         {
             await _mediator.Send(new DeleteDriverHistoryCommand(id));
@@ -38,6 +41,7 @@ namespace CarRental.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = $"{UserRole.Admin},{UserRole.Dispatcher}")]
         public async Task<ActionResult<DriverHistoryDTO>> UpdateDriverHistory(Guid id, UpdateDriverHistoryCommand command)
         {
             if (id != command.Guid)

@@ -6,6 +6,7 @@ using CarRental.Application.CarCategories.Commands;
 using CarRental.Application.CarCategories.Queries;
 using CarRental.Application.CarCategories.Dtos;
 using CarRental.Application.Common.Models;
+using CarRental.Domain.Common.Enums;
 
 namespace CarRental.API.Controllers
 {
@@ -24,6 +25,7 @@ namespace CarRental.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{UserRole.Admin},{UserRole.Dispatcher}")]
         public async Task<ActionResult<CarCategoryDTO>> AddCarCategory(AddCarCategoryCommand command)
         {
             var result = await _mediator.Send(command);
@@ -31,6 +33,7 @@ namespace CarRental.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = UserRole.Admin)]
         public async Task<IActionResult> DeleteCarCategory(Guid id)
         {
             await _mediator.Send(new DeleteCarCategoryCommand(id));
@@ -38,6 +41,7 @@ namespace CarRental.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = $"{UserRole.Admin},{UserRole.Dispatcher}")]
         public async Task<ActionResult<CarCategoryDTO>> UpdateCarCategory(Guid id, UpdateCarCategoryCommand command)
         {
             if (id != command.Guid)
